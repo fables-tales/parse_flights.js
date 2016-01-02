@@ -40,7 +40,7 @@ function getAllFlightContainers(max, continuation) {
     //the 0th element in this list isn't a flight, and
     //get elements by class name doesn't return an array
     var build = [];
-    for (var i = 1; i < max;  i++) {
+    for (var i = 1; i < max+1;  i++) {
         build.push(routes[i]);
     }
     continuation(build);
@@ -67,7 +67,7 @@ function getFlightsFromContainer(container) {
     var individualFlights = container.getElementsByTagName("ol");
     var build = [];
     for (var i = 0; i < individualFlights.length; i++) {
-        build.push(parseFlight(individualFlights[0]));
+        build.push(parseFlight(individualFlights[i]));
     }
     console.log(build);
 
@@ -83,6 +83,7 @@ expandNextTab(i, function() {
                     for (var i = 0; i < routes.length; i++) {
                         completed = completed.concat(getFlightsFromContainer(routes[i]));
                     }
+                    console.log(completed);
                     document.body.innerHTML = JSON.stringify(completed);
                 });
             }, 1000);
